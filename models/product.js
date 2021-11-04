@@ -10,16 +10,63 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+    toJSON() {
+      return { ...this.get(), id: undefined };
+    }
   }
   Product.init(
     {
-      product_code: DataTypes.STRING,
-      nm_product: DataTypes.STRING,
-      selling_price: DataTypes.DECIMAL(10, 2),
-      hpp: DataTypes.DECIMAL(10, 2),
-      disc: DataTypes.INTEGER,
+      uuid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      product_code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          notNull: { msg: "Product Code Required" },
+          notEmpty: { msg: "Product Code Required" },
+        },
+      },
+      nm_product: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Product Name Required" },
+          notEmpty: { msg: "Product Name Required" },
+        },
+      },
+      selling_price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Price Required" },
+          notEmpty: { msg: "Price Required" },
+        },
+      },
+      hpp: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Cost Required" },
+          notEmpty: { msg: "Cost Required" },
+        },
+      },
+      disc: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       sold: DataTypes.INTEGER,
-      category_id: DataTypes.INTEGER,
+      category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Category Required" },
+          notEmpty: { msg: "Category Required" },
+        },
+      },
     },
     {
       sequelize,
