@@ -9,12 +9,13 @@ module.exports = {
         type: DataTypes.INTEGER,
       },
       uuid: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       product_code: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       nm_product: {
         type: DataTypes.STRING,
@@ -39,8 +40,8 @@ module.exports = {
       category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        refences: {
-          mode: "category",
+        references: {
+          model: "category",
           key: "id",
         },
       },

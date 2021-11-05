@@ -10,6 +10,7 @@ module.exports = {
       },
       category: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

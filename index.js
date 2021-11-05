@@ -18,5 +18,7 @@ app.get("/", (req, res) => {
 });
 //IMPORT ROUTER
 const productsRouter = require("./routes/productRouter");
+const categoryRoter = require("./routes/categoryRouter");
 //ROUTER
 app.use("/api/products/", productsRouter);
+app.use("/api/categories/", categoryRoter);

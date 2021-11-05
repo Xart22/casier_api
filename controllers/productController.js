@@ -1,4 +1,3 @@
-const db = require("../config/db");
 const { Product } = require("../models");
 
 const productCtrl = {
@@ -41,7 +40,7 @@ const productCtrl = {
       if (err.errors[0].message == "product_code must be unique") {
         res.status(400).json({
           status: "failed",
-          message: "duplicate entry for product_code",
+          message: "duplicate entry for product code",
         });
       } else {
         res.status(400).json({
